@@ -18,17 +18,18 @@ app.use('/js', express.static(path.join(__dirname,'node_modules/jquery/dist')));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-// myRouter.route('/Map').get((req,res) => {
-//     res.re('map');
-// })
+myRouter.route('/postRequest').get((req,res) => {
+    res.render('index');
+})
 
 app.use('/',myRouter);
 
 app.get('/', function(req,res){
     res.render('index', {
      title: 'MyLibrary',
-     nav: [{link: '/Map',  title: 'Map'},
-           {link: '/authors',  title:'Authors'}]
+     nav: [{link: '/map',  title: 'Map'},
+           {link: '/authors',  title:'Authors'},
+           {link: '/postrequest',  title:'PostRequest'}]
     });
 }); 
 
