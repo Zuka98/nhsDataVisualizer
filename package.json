@@ -6,9 +6,10 @@
     "license": "MIT",
     "author": "Zuka Murvanidze",
     "scripts": {
-        "start": "DEBUG=app node app.js"
+        "start": "DEBUG=index node index.js"
     },
     "dependencies": {
+        "body-parser": "^1.18.3",
         "bootstrap": "^4.3.1",
         "chalk": "2.4.2",
         "debug": "^4.1.1",
