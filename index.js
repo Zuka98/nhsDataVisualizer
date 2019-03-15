@@ -37,18 +37,16 @@ function insertToDatabase(){
 // })
 
 
-
 conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', ['E15', 8,5], 
     function (err, results, fields) {
         if (err) throw err;
     else console.log('Inserted ' + results.affectedRows + ' row(s).');
 })
 
-
-// conn.end(function (err) { 
-// if (err) throw err;
-// else  console.log('Done.') 
-// });
+conn.end(function (err) { 
+if (err) throw err;
+else  console.log('Done.') 
+});
 }
 
 
