@@ -21,9 +21,10 @@ var config = {
     port: 0,
     ssl: true
 };
-const conn = new mysql.createConnection(config);
+// const conn = new mysql.createConnection(config);
 
 function insertToDatabase(){  
+    const conn = new mysql.createConnection(config);
 
 // Dropping and initializing table again
 //     conn.query('DROP TABLE IF EXISTS wellbeingdata;', function (err, results, fields) { 
@@ -36,11 +37,12 @@ function insertToDatabase(){
 //     console.log('Created wellbeingdata table.');
 // })
 
-
 conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', ['E15', 8,5], 
     function (err, results, fields) {
         if (err) throw err;
-    else console.log('Inserted ' + results.affectedRows + ' row(s).');
+    else {
+        console.log('Inserted ' + results.affectedRows + ' row(s).');
+    }
 })
 
 conn.end(function (err) { 
@@ -72,11 +74,20 @@ app.get('/', function(req,res){
     });
 }); 
 
+
+//--- Queries to send data to database ---
 myRouter.route('/query')
     .get((req,res) => {
-        res.send("Hello Motherfucker");
+        res.send("Hello ");
         insertToDatabase();
 
+})
+
+myRouter.route('/androidquery')
+    .post((req,res) => {
+        insertToDatabase();
+        res.end("Finish");
+        
 })
 
 myRouter.route('/userdata')
@@ -89,7 +100,7 @@ myRouter.route('/userdata')
         // var errorRate = req.body.errorRate;
         // console.log("Postcode: " + postcode + " Score: " + score + " Error Rate: " + errorRate);
         // console.log(data);
-        res.end("yes")
+        res.end("Finish")
 })
 
 const port = process.env.PORT || 3000;
