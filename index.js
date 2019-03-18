@@ -85,28 +85,28 @@ app.get('/', function(req,res){
 myRouter.route('/map').get((req,res) => {
         let rawdata = fs.readFileSync('UK-Adresses/W.geojson');
         jsondata = JSON.parse(rawdata);
-        str = JSON.stringify(jsondata);
-        console.log(str);
         res.render('map', {
         title: 'MyLibrary',
         nav: [{link: '/map',  title: 'Map'}],
-        W: str
+        E: jsondata,
+       
 
        });
 
         
 })
 
-
-myRouter.route('/UK-Adresses/E.geojson')
+myRouter.route('/UK-Adresses')
     .get((req,res) => {
-        let rawdata = fs.readFileSync('UK-Adresses/W.geojson');
+        var myURL = 'UK-Adresses/' + req.url.split('?')[1] + '.geojson';
+        let rawdata = fs.readFileSync(myURL);
+        // let rawdata = fs.readFileSync(req.url + '.geojson');
         jsondata = JSON.parse(rawdata);
-        str = JSON.stringify(jsondata);
         res.send(jsondata);
-        console.log("wrote");
         res.end("Finish");
 })
+
+
 
 
 

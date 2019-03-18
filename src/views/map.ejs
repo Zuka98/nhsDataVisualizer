@@ -4,9 +4,9 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   </head>
   <body>
@@ -66,25 +66,66 @@
 
         
     // This is where loading happens
-    // w = map.data.loadGeoJson('../../UK-Adresses/W.geojson');
+    // w = map.data.loadGeoJson('/UK-Adresses/');
     // map.data.addGeoJson(w);
-    e = map.data.loadGeoJson('UK-Adresses/E.geojson');
-    map.data.addGeoJson(e);   
-    // console.log("Opened stuff");
 
 
+    
+
+    // e = $.ajax({
+    //   dataType: "json",
+    //   url: "UK-Adresses/",
+    //   data: "E",
+    //   success: success
+    // });
   
-
-
-
+  // e = $.getJSON( "UK-Adresses/", function( data ) {
+  //   map.data.addGeoJson(e);
+  //   alert(data);
+  // });
+ 
+  // });
+    // var adress = 'E'; 
+    // e = map.data.loadGeoJson('UK-Adresses/' , adress);
+    
 
     map.data.addListener('mouseover', function(event) {
       document.getElementById('info-box').textContent = event.feature.getProperty('name');
     });
 
-    map.data.setStyle(function(feature) {
-    var number = Math.random() * 10;
+    var arr = ['W','E', 'AB', 'AL', 'B', 'BA','BR','CA', 'SA', 'S', 'SG', 'SK', 'SP'];
+    
+    
+    function loadAreasOntoMap(i){
+    if(i >= arr.length){
+      console.log("Finished");
+    }
+    else{
+    areaAdress = arr[i];
+    $.ajax({
+      url: "/UK-Adresses/",
+      async: 'true',
+      //force to handle it as text
+      dataType: "text",
+      data:  areaAdress,
+      success: function(data) {
+          var json = $.parseJSON(data);
+          map.data.addGeoJson(json);
+      }
+    });
+     return loadAreasOntoMap(i + 1);
+  }
+}
 
+  loadAreasOntoMap(0);
+  
+   
+    map.data.setStyle(function(feature,number) {
+    var number = Math.random() * 10;
+    console.log(feature.getProperty('name'));
+    
+
+    // if(feature.getProperty('name') == 'E1'){
     var color = 'red';
     if(number > 2.5){
       color = 'blue';
@@ -97,9 +138,18 @@
     }
     return {
       fillColor: color,
-      strokeWeight: 1.2
+      strokeWeight: 1.1
      };
+    // }
+// 
+  //   else{
+  //     return{
+  //     fillColor: "#ffffff",
+  //     strokeWeight: 0.1
+  // }
+  //   }
       })};
+
 
       // map.data.addListener('mouseover', function(event) {
       //     alert(event.feature.getProperty('average'));
@@ -128,6 +178,5 @@
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=initMap">
     </script>
-
   </body>
 </html>
