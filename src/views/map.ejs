@@ -93,8 +93,19 @@
       document.getElementById('info-box').textContent = event.feature.getProperty('name');
     });
 
-    var arr = ['W','E', 'AB', 'AL', 'B', 'BA','BR','CA', 'SA', 'S', 'SG', 'SK', 'SP'];
-    
+    //FOR DEMO PURPOSES LOAD HALF THE MAP
+    // var arr = ['AB','AL','B','BA','BB','BD','BF','BH','BL','BN','BR','BS','BT','BX','CA','CB','CF',
+    //            'CH','CM','CO','CR','CT','CV', 'CW','DA','DD','DE','DG','DH','DL','DN','DT','DY','E','EC',
+    //             'EH','EN','EX','FK','FY','G','GIR','GL','GU','GY','HA','HD','HG','HP'];
+
+    //FOER DEMO PURPOSES LOAD WHOLE MAP
+    var arr = ['AB','AL','B','BA','BB','BD','BH','BL','BN','BR','BS','CA','CB','CF',
+               'CH','CM','CO','CR','CT','CV', 'CW','DA','DD','DE','DG','DH','DL','DN','DT','DY','E','EC',
+                'EH','EN','EX','FK','FY','G','GL','GU','HA','HD','HG','HP','HR','HS','HU','HX',
+                'IG','IP','IV','KA','KT','KW','KY','L','LA','LD','LE','LL','LN','LS','LU','M','ME',
+                'MK','ML','N','NE','NG','NN','NP','NR','NW','OL','OX','PA','PE','PH','PL','PO','PR','RG','RH',
+                'RM','S','SA','SE','SG','SK','SL','SM','SN','SO','SP','SR','SS','ST','SW','SY','TA','TD',
+                'TF','TN','TQ','TR','TS','TW','UB','W','WA','WC','WD','WF','WN','WR','WS','WV','YO','ZE']
     
     function loadAreasOntoMap(i){
     if(i >= arr.length){
