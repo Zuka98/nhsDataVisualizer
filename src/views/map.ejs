@@ -39,25 +39,17 @@
     </div>
 
     <div class = "wrapper">
-    <div id="map"></div>
-
-      <div id="info-box"> 
-      <div id = "postcode-txt">  </div> 
-      <div id = "score-txt">  </div> 
-      <div id = "quantity-txt">  </div> 
+        <div id="map"></div>
+        <div class = "content">
+              <div id = "postcode-txt">  </div> 
+              <div id = "score-txt">  </div> 
+              <div id = "quantity-txt">  </div> 
     </div>
 
-    </div>
-
-    
-
+  <script>
 
   
-    <script>
-
-    
-
-    function initMap() {
+  function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 7,
         center: {lat: 52.500, lng: 0.250},
@@ -126,7 +118,7 @@ loadAreasOntoMap(0);
     else{
       return{
         fillColor: "#ffffff",
-        strokeWeight: 0.08
+        strokeWeight: 0.1
        }
     }
 
