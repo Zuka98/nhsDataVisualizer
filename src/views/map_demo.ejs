@@ -39,8 +39,13 @@
     </div>
     <!-- <div id="info-box"> ? </div> -->
 
+    <div class = "wrapper">
     <div id="map"></div>
-
+    <div class = "content">
+          <div id = "postcode-txt">  </div> 
+          <div id = "score-txt">  </div> 
+          <div id = "quantity-txt">  </div> 
+    </div>
 
     <script>
 
@@ -52,10 +57,7 @@
         });
 
     
-
-    map.data.addListener('mouseover', function(event) {
-      document.getElementById('info-box').textContent = event.feature.getProperty('name');
-    });
+      var myMap = new Map();
 
     //FOER DEMO PURPOSES LOAD WHOLE MAP
     var arr = ['AB','AL','B','BA','BB','BD','BH','BL','BN','BR','BS','CA','CB','CF',
@@ -67,10 +69,7 @@
                 'TF','TN','TQ','TR','TS','TW','UB','W','WA','WC','WD','WF','WN','WR','WS','WV','YO','ZE']
     
     function loadAreasOntoMap(i){
-    if(i >= arr.length){
-      console.log("Finished");
-    }
-    else{
+    if(!(i >= arr.length)){
     areaAdress = arr[i];
     $.ajax({
       url: "/UK-Adresses/",
@@ -89,13 +88,17 @@
 
   loadAreasOntoMap(0);
   
+
+
    
     map.data.setStyle(function(feature,number) {
-    var number = Math.random() * 10;
-    console.log(feature.getProperty('name'));
-    
+    var score = (Math.random() * 10).toFixed(1);
+    var name = feature.getProperty('name');
+    var qtt = (Math.random() * 50).toFixed(0);
+    myMap.set(name,{ 'avgscore' : score , 'quantity' : qtt});
 
-    // if(feature.getProperty('name') == 'E1'){
+    if(myMap.has(name)){
+    var number = myMap.get(name).avgscore;
     var color = 'red';
     if(number > 2.5){
       color = 'orange';
@@ -108,24 +111,35 @@
     }
     return {
       fillColor: color,
-      strokeWeight: 0.2
+      strokeWeight: 0.4
      };
-    // }
-// 
-  //   else{
-  //     return{
-  //     fillColor: "#ffffff",
-  //     strokeWeight: 0.1
-  // }
-  //   }
-      })};
+  }
+
+    else{
+      return{
+        fillColor: "#ffffff",
+        strokeWeight: 0.1
+       }
+    }
+
+  });
 
 
-      // map.data.addListener('mouseover', function(event) {
-      //     alert(event.feature.getProperty('average'));
-      //     // document.getelement('info-box').textContent =
-      //     //     event.feature.getProperty('average');
-      //   })
+  map.data.addListener('mouseover', function(event) {
+    var name = event.feature.getProperty('name');
+    document.getElementById('postcode-txt').textContent = "Postcode: " + name;
+    if(myMap.has(name)){
+      document.getElementById('score-txt').textContent = "Average Score: " + myMap.get(name).avgscore;
+      document.getElementById('quantity-txt').textContent = "Number of records: " + myMap.get(name).quantity;
+    }
+    else{
+      document.getElementById('score-txt').textContent = "Average Score: " + "No Data";
+      document.getElementById('quantity-txt').textContent = "Number of records: " + "N/A";
+    }
+
+  });
+
+};
 
     </script>
 

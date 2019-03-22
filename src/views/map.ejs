@@ -69,10 +69,8 @@
      <% for(var i = 0; i < mapData.length; i++){ %>
           myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
     <% } %>  
-     console.log(myMap);
    
        
-   
   function loadAreasOntoMap(i){
     if(!(i >= arr.length)){
     areaAdress = arr[i];
@@ -112,8 +110,7 @@ loadAreasOntoMap(0);
       fillColor: color,
       strokeWeight: 0.4
      };
-
-    }
+  }
 
     else{
       return{
@@ -128,27 +125,21 @@ loadAreasOntoMap(0);
     var name = event.feature.getProperty('name');
     document.getElementById('postcode-txt').textContent = "Postcode: " + name;
     if(myMap.has(name)){
-      document.getElementById('score-txt').textContent = "Average Score: " + myMap.get(name).avgscore;
+      document.getElementById('score-txt').textContent = "Average Score: " + myMap.get(name).avgscore.toFixed(1);
       document.getElementById('quantity-txt').textContent = "Number of records: " + myMap.get(name).quantity;
     }
     else{
-      document.getElementById('score-txt').textContent = "Average Score: " + "Not Data";
+      document.getElementById('score-txt').textContent = "Average Score: " + "No Data";
       document.getElementById('quantity-txt').textContent = "Number of records: " + "N/A";
     }
-    
 
   });
 
+};
 
+</script>
 
-
-
-  };
-
-    </script>
-
-
-        <div class='my-legend'>
+    <div class='my-legend'>
           <div class='legend-title'> Legend illustrates colors that correspond to </br>
                             predicted average scores for individual post code areas</div>
           <div class='legend-scale'>
