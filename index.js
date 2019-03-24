@@ -23,7 +23,7 @@ var config = {
 };
 // const conn = new mysql.createConnection(config);
 
-function insertToDatabase(){  
+function insertToDatabase(postcode, score,errorRate){  
     const conn = new mysql.createConnection(config);
 
 // Dropping and initializing table again
@@ -37,7 +37,7 @@ function insertToDatabase(){
 //     console.log('Created wellbeingdata table.');
 // })
 
-conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', ['E15', 8,5], 
+conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', [postcode, score, errorRate], 
     function (err, results, fields) {
         if (err) throw err;
     else {
@@ -52,6 +52,11 @@ else  console.log('Done.')
 }
 
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(morgan('tiny'))
 app.use(express.static(path.join(__dirname,'/public/')));
 app.use('/css', express.static(path.join(__dirname,'node_modules/bootstrap/dist/css')));
@@ -60,11 +65,18 @@ app.use('/js', express.static(path.join(__dirname,'node_modules/jquery/dist')));
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+
+// Use of myRouter should be last thing
 app.use('/',myRouter);
 
-app.use(bodyParser.json({ type: 'application/*+json' }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text({ type: 'text/html' }))
+
+myRouter.route('/androidquery')
+    .post((req,res) => {
+        console.log(req.body);
+        var message = req.body;
+        insertToDatabase(message.postcode, message.score, message.errorRate);
+        res.end("Finish");
+})
 
 
 app.get('/', function(req,res){
@@ -79,29 +91,10 @@ app.get('/', function(req,res){
 myRouter.route('/query')
     .get((req,res) => {
         res.send("Hello ");
-        insertToDatabase();
+        insertToDatabase(message.postcode, message.score, message.errorRate);
 
 })
 
-myRouter.route('/androidquery')
-    .post((req,res) => {
-        insertToDatabase();
-        res.end("Finish");
-        
-})
-
-myRouter.route('/userdata')
-    .post((req,res) => {
-        console.log(req.body);
-        var data = req.body;
-        console.log(typeof(data));
-        // var postcode = req.body.postcode;
-        // var score = req.body.score;
-        // var errorRate = req.body.errorRate;
-        // console.log("Postcode: " + postcode + " Score: " + score + " Error Rate: " + errorRate);
-        // console.log(data);
-        res.end("Finish")
-})
 
 const port = process.env.PORT || 3000;
 app.listen(port, function(){
