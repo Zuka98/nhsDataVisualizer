@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Layer: Polygon</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../../public/css/mapstyle.css">
+    <script type="text/javascript" src="script.js"></script>
+
+  </head>
+  <body>
+
+
+    <div style="text-align:center">
+      <h2> UK Well-Being Data </h2>
+    </div>
+    <!-- <div id="info-box"> ? </div> -->
+
+    <div id="map"></div>
+
+
+    <script>
+       function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: {lat: 52.500, lng: 0.250},
+        });
+
+
+    w = map.data.loadGeoJson('../../UK-Adresses/W.geojson');
+    map.data.addGeoJson(w);
+    e = map.data.loadGeoJson('../../UK-Adresses/E.geojson');
+    map.data.addGeoJson(e);
+    ec = map.data.loadGeoJson('../../UK-Adresses/EC.geojson');
+    map.data.addGeoJson(ec);
+
+
+
+
+    map.data.addListener('mouseover', function(event) {
+      document.getElementById('info-box').textContent = event.feature.getProperty('name');
+    });
+
+    map.data.setStyle(function(feature) {
+    var number = Math.random() * 10;
+
+    var color = 'red';
+    if(number > 2.5){
+      color = 'blue';
+    }
+    if(number > 5){
+      color = 'yellow';
+    }
+    if(number > 7.5){
+      color = 'green';
+    }
+    return {
+      fillColor: color,
+      strokeWeight: 1.2
+     };
+      })};
+
+      // map.data.addListener('mouseover', function(event) {
+      //     alert(event.feature.getProperty('average'));
+      //     // document.getelement('info-box').textContent =
+      //     //     event.feature.getProperty('average');
+      //   });
+
+
+      </script>
+
+
+        <div class='my-legend'>
+          <div class='legend-title'> Legend illustrates colors that correspond to </br>
+                            predicted average scores for individual post code areas</div>
+          <div class='legend-scale'>
+            <ul class='legend-labels'>
+              <li><span style='background:red;'></span>0 - 2.5</li>
+              <li><span style='background:blue;'></span>2.5 - 5.0</li>
+              <li><span style='background:yellow;'></span>5.0 - 7.5</li>
+              <li><span style='background:green;'></span>7.5 - 10</li>
+            </ul>
+          </div>
+
+          </div>
+
+
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=initMap">
+    </script>
+
+  </body>
+</html>

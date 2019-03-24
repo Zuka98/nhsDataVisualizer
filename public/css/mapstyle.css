@@ -1,0 +1,70 @@
+#map{
+    text-align: center;
+    width: auto;
+    height: 70%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 2%;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+#info-box {
+    text-align: center;
+    background-color: white;
+    border: 4px solid black;
+    bottom: 30px;
+    height: 20px;
+    padding: 10px;
+    position: absolute;
+    float: top;
+  }
+
+  .my-legend{
+    text-align: center;
+    float: center;
+    margin-left: 5%;
+    margin-right: auto;
+  }
+
+  .my-legend .legend-title {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight:  bold;
+    font-size: 90%;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    padding: 0;
+    float: left;
+    list-style: none;
+    border-style: groove;
+    border-color: gray;
+
+    }
+  .my-legend .legend-scale ul li {
+    display: block;
+    float: left;
+    width: 80px;
+    margin-bottom: 6px;
+    text-align: center;
+    font-size: 80%;
+    list-style: none;
+    font-weight: bold;
+
+
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 20px;
+    width: 80px;
+    }
+
+  .my-legend a {
+    color: #777;
+    }

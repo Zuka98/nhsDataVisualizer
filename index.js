@@ -86,6 +86,14 @@ app.get('/', function(req,res){
     });
 }); 
 
+myRouter.route('/map')
+    .get((req,res) => {res.render('map', {
+        title: 'MyLibrary',
+        nav: [{link: '/map',  title: 'Map'}]
+       });
+        
+})
+
 
 //--- Queries to send data to database ---
 myRouter.route('/query')
