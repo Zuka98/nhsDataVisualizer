@@ -26,17 +26,6 @@ var config = {
 function insertToDatabase(postcode, score,errorRate){  
     const conn = new mysql.createConnection(config);
 
-// Dropping and initializing table again
-//     conn.query('DROP TABLE IF EXISTS wellbeingdata;', function (err, results, fields) { 
-//     if (err) throw err; 
-//     console.log('Dropped wellbeingdata table if existed.');
-// })
-// conn.query('CREATE TABLE wellbeingdata (id serial PRIMARY KEY, postcode VARCHAR(10), score INTEGER, errorRate INTEGER);', 
-//     function (err, results, fields) {
-//         if (err) throw err;
-//     console.log('Created wellbeingdata table.');
-// })
-
 conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', [postcode, score, errorRate], 
     function (err, results, fields) {
         if (err) throw err;
@@ -58,10 +47,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('tiny'))
+// One I added recently
+app.use('/css', express.static(path.join(__dirname,'public/css')));
+
 app.use(express.static(path.join(__dirname,'/public/')));
 app.use('/css', express.static(path.join(__dirname,'node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname,'node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname,'node_modules/jquery/dist')));
+
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -86,13 +79,16 @@ app.get('/', function(req,res){
     });
 }); 
 
-myRouter.route('/map')
-    .get((req,res) => {res.render('map', {
+myRouter.route('/map').get((req,res) => {
+        res.render('map', {
         title: 'MyLibrary',
         nav: [{link: '/map',  title: 'Map'}]
        });
+
         
 })
+
+
 
 
 //--- Queries to send data to database ---

@@ -4,15 +4,53 @@
     <title>Data Layer: Polygon</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../../public/css/mapstyle.css">
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link href="css/styles.css" rel="stylesheet">
     <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
 
   </head>
   <body>
 
+  
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Home</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <% for(var i = 0; i < nav.length; i++){ %>
+        <li> <a href= " <%= nav[i].link %>" > <%=nav[i].title%> </a> </li>
+        <% } %>
+      
+        
+      </ul>
+      <ul class="nav navbar-right navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+          <ul class="dropdown-menu" style="padding:12px;">
+            <form class="form-inline">
+              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+            </form>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
 
     <div style="text-align:center">
-      <h2> UK Well-Being Data </h2>
+      <h2 style = "margin-top:5%; margin-bottom:2%"> UK Well-Being Data </h2>
     </div>
     <!-- <div id="info-box"> ? </div> -->
 
@@ -20,6 +58,8 @@
 
 
     <script>
+
+    
        function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 7,
@@ -64,10 +104,9 @@
       //     alert(event.feature.getProperty('average'));
       //     // document.getelement('info-box').textContent =
       //     //     event.feature.getProperty('average');
-      //   });
+      //   })
 
-
-      </script>
+    </script>
 
 
         <div class='my-legend'>
