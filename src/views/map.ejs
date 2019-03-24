@@ -1,14 +1,11 @@
-<!DOCTYPE html>
 <html>
   <head>
     <title>Data Layer: Polygon</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link href="css/styles.css" rel="stylesheet">
-    <script type="text/javascript" src="script.js"></script>
     <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
 
   </head>
@@ -67,12 +64,16 @@
         });
 
 
-    w = map.data.loadGeoJson('../../UK-Adresses/W.geojson');
-    map.data.addGeoJson(w);
-    e = map.data.loadGeoJson('../../UK-Adresses/E.geojson');
-    map.data.addGeoJson(e);
-    ec = map.data.loadGeoJson('../../UK-Adresses/EC.geojson');
-    map.data.addGeoJson(ec);
+        
+    // This is where loading happens
+    // w = map.data.loadGeoJson('../../UK-Adresses/W.geojson');
+    // map.data.addGeoJson(w);
+    e = map.data.loadGeoJson('UK-Adresses/E.geojson');
+    map.data.addGeoJson(e);   
+    // console.log("Opened stuff");
+
+
+  
 
 
 

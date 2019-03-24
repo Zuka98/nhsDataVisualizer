@@ -4,6 +4,8 @@ var app = express();
 var debug = require('debug')('app');
 var morgan = require('morgan');
 var chalk = require('chalk');
+var fs = require('fs');
+var str = require('stringify');
 
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -46,6 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 app.use(morgan('tiny'))
 // One I added recently
 app.use('/css', express.static(path.join(__dirname,'public/css')));
@@ -80,12 +83,29 @@ app.get('/', function(req,res){
 }); 
 
 myRouter.route('/map').get((req,res) => {
+        let rawdata = fs.readFileSync('UK-Adresses/W.geojson');
+        jsondata = JSON.parse(rawdata);
+        str = JSON.stringify(jsondata);
+        console.log(str);
         res.render('map', {
         title: 'MyLibrary',
-        nav: [{link: '/map',  title: 'Map'}]
+        nav: [{link: '/map',  title: 'Map'}],
+        W: str
+
        });
 
         
+})
+
+
+myRouter.route('/UK-Adresses/E.geojson')
+    .get((req,res) => {
+        let rawdata = fs.readFileSync('UK-Adresses/W.geojson');
+        jsondata = JSON.parse(rawdata);
+        str = JSON.stringify(jsondata);
+        res.send(jsondata);
+        console.log("wrote");
+        res.end("Finish");
 })
 
 
