@@ -27,7 +27,7 @@ var config = {
 // const conn = new mysql.createConnection(config);
 
 function insertToDatabase(postcode, score, errorRate) {
-    conn.query('INSERT INTO wellbeingdata (postcode, score, errorRate) VALUES (?, ?, ?);', [postcode, score, errorRate],
+    conn.query('INSERT INTO w12 (postcode, score, errorRate) VALUES (?, ?, ?);', [postcode, score, errorRate],
         function (err, results, fields) {
             if (err) throw err;
             else {
@@ -81,7 +81,7 @@ app.get('/', function (req, res) {
 
 myRouter.route('/map').get((req, res) => {
         const conn = new mysql.createConnection(config);
-        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM testdb.wellbeingdata GROUP BY (postcode);',
+        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM testdb.w12 GROUP BY (postcode);',
         function (err, results) {
             if (err) {
                 debug.log(err);
