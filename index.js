@@ -112,17 +112,7 @@ myRouter.route('/map').get((req, res) => {
 myRouter.route('/demomap').get((req, res) => {
     res.render('map_demo', {
         title: 'MyLibrary',
-        nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' },{link: '/test', title: 'Index'}]
-
-    });
-
-
-})
-
-myRouter.route('/test').get((req, res) => {
-    res.render('tindex', {
-        title: 'MyLibrary',
-        nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }, {link: '/test', title: 'Index'}]
+        nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
 
     });
 
