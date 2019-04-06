@@ -1,196 +1,161 @@
-<html>
-  <head>
-    <title>Data Layer: Polygon</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<html lang="zxx" class="no-js">
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="Colorlib">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Wellbeing Data - Home</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,400,300,500,600,700" rel="stylesheet">
+		<!--
+		CSS
+    ============================================= -->
     <link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  </head>
+		<link rel="stylesheet" href="css/linearicons.css">
+		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/nice-select.css">
+		<link rel="stylesheet" href="css/magnific-popup.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<!-- Start Header Area -->
+		<header class="default-header">
+			<div class="container">
+				<div class="header-wrap">
+					<div class="header-top d-flex justify-content-between align-items-center">
+						<div class="logo">
+							<a href="index.html"><img src="img/logo.png" alt=""></a>
+						</div>
+						<div class="main-menubar d-flex align-items-center">
+							<nav class="hide">
+							<% for(var i = 0; i < nav.length; i++){ %>
+							 <a href= " <%= nav[i].link %>" > <%=nav[i].title%> </a>
+							<% } %> 
+							</nav>
+							<div class="menu-bar"><span class="lnr lnr-menu"></span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- End Header Area -->
+    
+    <!-- Start Banner Area -->
+		<section class="generic-banner relative">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+      <div class="row height align-items-center justify-content-center">
+        <div class="col-lg-10">
+          <div class="banner-content text-center">
+            <h2 class="text-white">UK Wellbeing data</h2>
+            <p class="text-white"> By default map visualizes the data recorded in the most recent week. <br> 
+            Please use the timeline table to load historic data</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Banner Area -->
+
+
+  <!--  Map Timeline Area --> 
+
+ <div class="section-top-border">
+ <h3 class="mb-10">Timeline table of weekly user data</h3>
+ <div class="progress-table-wrap">
+   <div class="progress-table">
+     <div class="table-head">
+       <div class="serial">#</div>
+       <div class="country">Country</div>
+       <div class="visit">Time Interval</div>
+       <div class="percentage">Number of Records</div>
+     </div>
+
+     <div class="table-row">
+       <div class="serial">01</div>
+       <div class="country"> <img src="img/f3.jpg" alt="flag">United Kingdom</div>
+       <div class="visit"> <a href="#" > 05.03.2019 - 12.03.2019 </a></div>
+       <div class="percentage">
+         <div class="progress">
+           <div class="progress-bar color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+         </div>
+       </div>
+     </div>
+     
+
+     <div class="table-row">
+       <div class="serial">02</div>
+       <div class="country"> <img src="img/f3.jpg" alt="flag">United Kingdom</div>
+       <div class="visit"> <a href="#" > 12.03.2019 - 19.03.2019 </a></div>
+       <div class="percentage">
+         <div class="progress">
+           <div class="progress-bar color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+         </div>
+       </div>
+     </div>
+    
+
+     <div class="table-row">
+       <div class="serial">03</div>
+       <div class="country"> <img src="img/f3.jpg" alt="flag">United Kingdom</div>
+       <div class="visit"> <a href="#" > 19.03.2019 - 26.03.2019</a></div>
+       <div class="percentage">
+         <div class="progress">
+           <div class="progress-bar color-3" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+         </div>
+       </div>
+     </div>
+     </div>
+   
+   
   
-  <body>
+ </div>
+</div>
 
-<header class="navbar navbar-bright navbar-fixed-top" role="banner">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">Home</a>
-    </div>
-    <nav class="collapse navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav">
-        <% for(var i = 0; i < nav.length; i++){ %>
-        <li> <a href= " <%= nav[i].link %>" > <%=nav[i].title%> </a> </li>
-        <% } %>        
-      </ul>
-    </nav>
-  </div>
-</header>
+  <!-- End Map Timeline Area --> 
 
 
-    <div style="text-align:center">
-      <h2 style = "margin-top:5%; margin-bottom:2%"> UK Well-Being Data </h2>
-    </div>
+  <!-- Map Area -->
+    <section> 
 
     <div class = "wrapper">
-        <div id="map"></div>
-        <div class = "content">
-              <div id = "postcode-txt">  </div> 
-              <div id = "score-txt">  </div> 
-              <div id = "quantity-txt">  </div> 
+    <div id="map"> </div>
+    <div class = "content">
+          <div id = "postcode-txt">  </div> 
+          <div id = "score-txt">  </div> 
+          <div id = "quantity-txt">  </div> 
     </div>
 
-  <script>
+    <script>
 
-  function initMap() {
-        var lightStyle = new google.maps.StyledMapType(
-          [
-          {
-            "featureType": "administrative",
-            "elementType": "geometry",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "administrative.land_parcel",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "administrative.neighborhood",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "stylers": [
-              {
-                "saturation": -10
-              },
-              {
-                "lightness": 40
-              },
-              {
-                "weight": 0.5
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "road",
-            "elementType": "labels.icon",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "transit",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "water",
-            "elementType": "labels.text",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          }
-        ],
-        {name: 'Light'});
-
-        var darkStyle = new google.maps.StyledMapType(
-          [
-            {
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#212121"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.icon",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#212121"
-                }
-              ]
-            },
+    function initMap() {
+          var lightStyle = new google.maps.StyledMapType(
+            [
             {
               "featureType": "administrative",
               "elementType": "geometry",
               "stylers": [
                 {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "featureType": "administrative.country",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#9e9e9e"
+                  "visibility": "off"
                 }
               ]
             },
             {
               "featureType": "administrative.land_parcel",
-              "elementType": "labels",
               "stylers": [
                 {
                   "visibility": "off"
@@ -198,17 +163,7 @@
               ]
             },
             {
-              "featureType": "administrative.locality",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#bdbdbd"
-                }
-              ]
-            },
-            {
-              "featureType": "poi",
-              "elementType": "labels.text",
+              "featureType": "administrative.neighborhood",
               "stylers": [
                 {
                   "visibility": "off"
@@ -217,54 +172,9 @@
             },
             {
               "featureType": "poi",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#757575"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.business",
               "stylers": [
                 {
                   "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#181818"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#616161"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "elementType": "labels.text.stroke",
-              "stylers": [
-                {
-                  "color": "#1b1b1b"
                 }
               ]
             },
@@ -275,7 +185,7 @@
                   "saturation": -10
                 },
                 {
-                  "visibility": "simplified"
+                  "lightness": 40
                 },
                 {
                   "weight": 0.5
@@ -284,262 +194,465 @@
             },
             {
               "featureType": "road",
-              "elementType": "geometry.fill",
+              "elementType": "labels",
               "stylers": [
                 {
-                  "color": "#2c2c2c"
+                  "visibility": "off"
                 }
               ]
             },
             {
               "featureType": "road",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#8a8a8a"
-                }
-              ]
-            },
-            {
-              "featureType": "road.arterial",
+              "elementType": "labels.icon",
               "stylers": [
                 {
                   "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.arterial",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#373737"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#3c3c3c"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway",
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.highway.controlled_access",
-              "elementType": "geometry",
-              "stylers": [
-                {
-                  "color": "#4e4e4e"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "road.local",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#616161"
                 }
               ]
             },
             {
               "featureType": "transit",
-              "elementType": "labels.text.fill",
               "stylers": [
                 {
-                  "color": "#757575"
+                  "visibility": "off"
                 }
               ]
             },
             {
               "featureType": "water",
-              "elementType": "geometry",
+              "elementType": "labels.text",
               "stylers": [
                 {
-                  "color": "#000000"
-                }
-              ]
-            },
-            {
-              "featureType": "water",
-              "elementType": "labels.text.fill",
-              "stylers": [
-                {
-                  "color": "#3d3d3d"
+                  "visibility": "off"
                 }
               ]
             }
           ],
-        {name: 'Dark'});
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 7,
-          center: {lat: 52.500, lng: 0.250},
-          mapTypeControl: true,
-          streetViewControl: false,
-          mapTypeControlOptions: {
-            mapTypeIds: ['light', 'dark'],
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.LEFT_BOTTOM,
-          }
-        });
-        map.mapTypes.set('dark', darkStyle);
-        map.mapTypes.set('light', lightStyle);
-        map.setMapTypeId('light');
-
-    //Load whole map and only color the regions saved in the database.
-    // This way is better for visuals and much more efficient
-    var arr = ['AB','AL','B','BA','BB','BD','BH','BL','BN','BR','BS','CA','CB','CF',
-     'CH','CM','CO','CR','CT','CV', 'CW','DA','DD','DE','DG','DH','DL','DN','DT','DY','E','EC',
-     'EH','EN','EX','FK','FY','G','GL','GU','HA','HD','HG','HP','HR','HS','HU','HX',
-     'IG','IP','IV','KA','KT','KW','KY','L','LA','LD','LE','LL','LN','LS','LU','M','ME',
-     'MK','ML','N','NE','NG','NN','NP','NR','NW','OL','OX','PA','PE','PH','PL','PO','PR','RG','RH',
-     'RM','S','SA','SE','SG','SK','SL','SM','SN','SO','SP','SR','SS','ST','SW','SY','TA','TD',
-     'TF','TN','TQ','TR','TS','TW','UB','W','WA','WC','WD','WF','WN','WR','WS','WV','YO','ZE'];
-
-     var myMap = new Map();
-     <% for(var i = 0; i < mapData.length; i++){ %>
-          myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
-    <% } %>  
-   
-       
-  function loadAreasOntoMap(i){
-    if(!(i >= arr.length)){
-    areaAdress = arr[i];
-    $.ajax({
-      url: '/UK-Adresses/',
-      async: 'true',
-      //force to handle it as text
-      dataType: "text",
-      data:  areaAdress,
-      success: function(data) {
-          var json = $.parseJSON(data);
-          map.data.addGeoJson(json);
-      }
-    });
-     return loadAreasOntoMap(i + 1);
-  }
-}
-
-loadAreasOntoMap(0);
+          {name: 'Light'});
   
-   
-    map.data.setStyle(function(feature,number) { 
-  var name = feature.getProperty('name');
-  if(myMap.has(name)){
-    var number = myMap.get(name).avgscore;
-    var color = 'red';
-    if(number > 2.5){
-      color = 'orange';
-    }
-    if(number > 5){
-      color = 'yellow';
-    }
-    if(number > 7.5){
-      color = 'green';
-    }
-    return {
-      fillColor: color,
-      strokeWeight: 0.4
-     };
-  }
-
-    else{
-      return{
-        fillColor: "#ffffff",
-        strokeWeight: 0.1
-       }
-    }
-
-  });
-
-  map.data.addListener('mouseover', function(event) {
-    var name = event.feature.getProperty('name');
-    document.getElementById('postcode-txt').textContent = "Postcode: " + name;
-    if(myMap.has(name)){
-      document.getElementById('score-txt').textContent = "Average Score: " + myMap.get(name).avgscore.toFixed(1);
-      document.getElementById('quantity-txt').textContent = "Number of records: " + myMap.get(name).quantity;
-    }
-    else{
-      document.getElementById('score-txt').textContent = "Average Score: " + "No Data";
-      document.getElementById('quantity-txt').textContent = "Number of records: " + "N/A";
-    }
-
-  });
-
-};
-
-</script>
-
-    <div class='my-legend'>
-          <div class='legend-title'> Legend illustrates colors that correspond to </br>
-                            predicted average scores for individual post code areas</div>
-          <div class='legend-scale'>
-            <ul class='legend-labels'>
-              <li><span style='background:red;'></span>0 - 2.5</li>
-              <li><span style='background:orange;'></span>2.5 - 5.0</li>
-              <li><span style='background:yellow;'></span>5.0 - 7.5</li>
-              <li><span style='background:green;'></span>7.5 - 10</li>
-            </ul>
-          </div>
-
-          </div>
-
-       
-        <div class="input-group">
-          <div class="input-group-btn">
-             <button>  Week 1 </button> 
-             <button>  Week 1 </button> 
-             <button>  Week 1 </button> 
-             <button>  Week 1 </button> 
-          </div>
-        </div>
-        
-
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=initMap">
-    </script>
+          var darkStyle = new google.maps.StyledMapType(
+            [
+              {
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#212121"
+                  }
+                ]
+              },
+              {
+                "elementType": "labels.icon",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#757575"
+                  }
+                ]
+              },
+              {
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                  {
+                    "color": "#212121"
+                  }
+                ]
+              },
+              {
+                "featureType": "administrative",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#757575"
+                  }
+                ]
+              },
+              {
+                "featureType": "administrative.country",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#9e9e9e"
+                  }
+                ]
+              },
+              {
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "administrative.locality",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#bdbdbd"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi",
+                "elementType": "labels.text",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#757575"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.business",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#181818"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "elementType": "labels.text",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#616161"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                  {
+                    "color": "#1b1b1b"
+                  }
+                ]
+              },
+              {
+                "featureType": "road",
+                "stylers": [
+                  {
+                    "saturation": -10
+                  },
+                  {
+                    "visibility": "simplified"
+                  },
+                  {
+                    "weight": 0.5
+                  }
+                ]
+              },
+              {
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [
+                  {
+                    "color": "#2c2c2c"
+                  }
+                ]
+              },
+              {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#8a8a8a"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.arterial",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#373737"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#3c3c3c"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.highway",
+                "elementType": "labels",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.highway.controlled_access",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#4e4e4e"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.local",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.local",
+                "elementType": "labels",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#616161"
+                  }
+                ]
+              },
+              {
+                "featureType": "transit",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#757575"
+                  }
+                ]
+              },
+              {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                  {
+                    "color": "#000000"
+                  }
+                ]
+              },
+              {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                  {
+                    "color": "#3d3d3d"
+                  }
+                ]
+              }
+            ],
+          {name: 'Dark'});
   
-
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: {lat: 52.500, lng: 0.250},
+            mapTypeControl: true,
+            streetViewControl: false,
+            mapTypeControlOptions: {
+              mapTypeIds: ['light', 'dark'],
+              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              position: google.maps.ControlPosition.LEFT_BOTTOM,
+            }
+          });
+          map.mapTypes.set('dark', darkStyle);
+          map.mapTypes.set('light', lightStyle);
+          map.setMapTypeId('light');
+  
+      //Load whole map and only color the regions saved in the database.
+      // This way is better for visuals and much more efficient
+      var arr = ['AB','AL','B','BA','BB','BD','BH','BL','BN','BR','BS','CA','CB','CF',
+       'CH','CM','CO','CR','CT','CV', 'CW','DA','DD','DE','DG','DH','DL','DN','DT','DY','E','EC',
+       'EH','EN','EX','FK','FY','G','GL','GU','HA','HD','HG','HP','HR','HS','HU','HX',
+       'IG','IP','IV','KA','KT','KW','KY','L','LA','LD','LE','LL','LN','LS','LU','M','ME',
+       'MK','ML','N','NE','NG','NN','NP','NR','NW','OL','OX','PA','PE','PH','PL','PO','PR','RG','RH',
+       'RM','S','SA','SE','SG','SK','SL','SM','SN','SO','SP','SR','SS','ST','SW','SY','TA','TD',
+       'TF','TN','TQ','TR','TS','TW','UB','W','WA','WC','WD','WF','WN','WR','WS','WV','YO','ZE'];
+  
+       var myMap = new Map();
+       <% for(var i = 0; i < mapData.length; i++){ %>
+            myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
+      <% } %>  
+     
+         
+    function loadAreasOntoMap(i){
+      if(!(i >= arr.length)){
+      areaAdress = arr[i];
+      $.ajax({
+        url: '/UK-Adresses/',
+        async: 'true',
+        //force to handle it as text
+        dataType: "text",
+        data:  areaAdress,
+        success: function(data) {
+            var json = $.parseJSON(data);
+            map.data.addGeoJson(json);
+        }
+      });
+       return loadAreasOntoMap(i + 1);
+    }
+  }
+  
+  loadAreasOntoMap(0);
     
-  <footer style="margin-top: 10%">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-          <p class="pull-right"> © UCL Team 9</p>      
-      </div>
+     
+      map.data.setStyle(function(feature,number) { 
+    var name = feature.getProperty('name');
+    if(myMap.has(name)){
+      var number = myMap.get(name).avgscore;
+      var color = 'red';
+      if(number > 2.5){
+        color = 'orange';
+      }
+      if(number > 5){
+        color = 'yellow';
+      }
+      if(number > 7.5){
+        color = 'green';
+      }
+      return {
+        fillColor: color,
+        strokeWeight: 0.4
+       };
+    }
+  
+      else{
+        return{
+          fillColor: "#ffffff",
+          strokeWeight: 0.1
+         }
+      }
+  
+    });
+  
+    map.data.addListener('mouseover', function(event) {
+      var name = event.feature.getProperty('name');
+      document.getElementById('postcode-txt').textContent = "Postcode: " + name;
+      if(myMap.has(name)){
+        document.getElementById('score-txt').textContent = "Average Score: " + myMap.get(name).avgscore.toFixed(1);
+        document.getElementById('quantity-txt').textContent = "Number of records: " + myMap.get(name).quantity;
+      }
+      else{
+        document.getElementById('score-txt').textContent = "Average Score: " + "No Data";
+        document.getElementById('quantity-txt').textContent = "Number of records: " + "N/A";
+      }
+  
+    });
+  
+  };
+  
+  </script>
     </div>
+  </section>
+
+<!-- End Map Area -->
+
+
+
+  <!--  Map Legend Area --> 
+  <section class="feature-area">
+          <div class="desc">
+            <div id = "legendTitle"> Map Legend </div> 
+            <div class="legendContainer">
+            <table>
+                  <tbody class= "legendtbody tb">
+                    <tr>
+                      <td class = "lth">Color</td>
+                      <td class = "ltd"><span style='background:red;' class="lspan" ></span></td>
+                      <td class = "ltd"><span style='background:orange;' class="lspan"></span></td>
+                      <td class = "ltd" > <span style='background:yellow;' class="lspan"></span></td>
+                      <td class = "ltd"><span style='background:green;' class="lspan"></span></td>
+                    </tr>
+          
+                    <tr>
+                      <td class = "lth">Range</td>
+                      <td class = "ltd">0 - 2.5</td>
+                      <td class = "ltd">2.5 - 5</td>
+                      <td class = "ltd">5 - 7.5</td>
+                      <td class = "ltd">7.5 - 10</td>
+                    </tr>
+          
+                  </tbody>
+            </table>
+          </div>
   </div>
-</footer>
+</section>
 
-</body>
+ <!--  End Map Legend Area --> 
 
+
+
+  
+
+	
+		<!-- Start Footer Area -->
+		<footer class="footer-area pt-40 pb-40">
+			<div class="container">
+				<div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap">
+					<p class="footer-text m-0 text-white"> UCL Team 9 | Copyright &copy; All rights reserved | Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>  </p>
+				</div>
+			</div>
+		</footer>
+		<!-- End Footer Area -->
+		<script src="js/vendor/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/jquery.ajaxchimp.min.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/jquery.nice-select.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/jquery.flipster.min.js"></script>
+    <script src="js/main.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=initMap"> </script>
+	</body>
 </html>

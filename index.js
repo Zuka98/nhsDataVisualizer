@@ -75,7 +75,7 @@ myRouter.route('/androidquery')
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'MyLibrary',
-        nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
+        nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
     });
 });
 
@@ -84,7 +84,7 @@ app.get('/', function (req, res) {
 myRouter.route('/demomap').get((req, res) => {
     res.render('map_demo', {
         title: 'MyLibrary',
-        nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
+        nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
 
     });
 })
@@ -106,7 +106,7 @@ myRouter.route('/map').get((req, res) => {
         
             res.render('map', {
                 title: 'Map',
-                nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
+                nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
                 mapData: mapDataArray,
             });
             }
