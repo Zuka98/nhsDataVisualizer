@@ -50,11 +50,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('tiny'))
 // One I added recently
 app.use('/css', express.static(path.join(__dirname, 'public/css')));
+app.use('/js', express.static(path.join(__dirname, 'public/js')));
+app.use('/img', express.static(path.join(__dirname, 'public/img')));
+app.use('/fonts', express.static(path.join(__dirname, 'public/fonts')));
 
 app.use(express.static(path.join(__dirname, '/public/')));
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+
 
 
 app.set('views', './src/views');
@@ -74,9 +75,19 @@ myRouter.route('/androidquery')
 app.get('/', function (req, res) {
     res.render('index', {
         title: 'MyLibrary',
-        nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
+        nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
     });
 });
+
+
+//To display mock up data for demo purposes
+myRouter.route('/demomap').get((req, res) => {
+    res.render('map_demo', {
+        title: 'MyLibrary',
+        nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
+
+    });
+})
 
 
 myRouter.route('/map').get((req, res) => {
@@ -95,7 +106,7 @@ myRouter.route('/map').get((req, res) => {
         
             res.render('map', {
                 title: 'Map',
-                nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
+                nav: [{ link: '/index', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
                 mapData: mapDataArray,
             });
             }
@@ -108,16 +119,7 @@ myRouter.route('/map').get((req, res) => {
         
 })
 
-//To display mock up data for demo purposes
-myRouter.route('/demomap').get((req, res) => {
-    res.render('map_demo', {
-        title: 'MyLibrary',
-        nav: [{ link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
 
-    });
-
-
-})
 
 
 
