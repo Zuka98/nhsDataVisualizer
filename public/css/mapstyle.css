@@ -11,6 +11,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: white;
   }
 
 
@@ -23,15 +24,17 @@ html, body {
 
   .content {
       position: absolute;
-      border: 1.5px solid black;
-      padding: 0.5%;
+      border: 1.7px solid black;
+      padding: 0.1%;
+      margin: 2%;
       top: 10px;
       left: 6%;
       background: white;
       height: 10%;
-      min-height: 70px;
-      min-width: 180px;
+      min-height: 80px;
+      min-width: 190px;
       text-align: left;
+      color: black;
   }
 
   /* Currently Info-Box is not in use */
