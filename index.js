@@ -92,7 +92,7 @@ myRouter.route('/demomap').get((req, res) => {
 
 myRouter.route('/map').get((req, res) => {
         const conn = new mysql.createConnection(config);
-        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w12 GROUP BY (postcode);',
+        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w13 GROUP BY (postcode);',
         function (err, results) {
             if (err) {
                 debug.log(err);
