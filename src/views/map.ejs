@@ -78,22 +78,19 @@
 
 
 <section style="margin-top: 3%;">
-  <div class="container border-top-generic">
-    <h3 class="text-heading">Recorded Weeks 2019</h3>
+    <div class="container border-top-generic">
+      <h3 class="text-heading">Recorded Weeks 2019</h3>
 
-
-
-<div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Please Select the week
-  </button>
-  <div class="dropdown-menu">
-  <% for(var i = 0; i < weektables.length; i++){ %>
-  <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
-      <% } %> 
-</div>
-
-</div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Please Select the week
+      </button>
+          <div class="dropdown-menu">
+          <% for(var i = 0; i < weektables.length; i++){ %>
+          <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
+            <% } %> 
+          </div>
+    </div>
 </section>
 
 <!-- End Toggle Down Button -->
