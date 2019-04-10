@@ -36,17 +36,19 @@ function getNumberOfWeek() {
 
 function insertToDatabase(postcode, score, errorRate) {
     const conn = new mysql.createConnection(config);
-    var tbname = 'w' + getNumberOfWeek() + '.wellbeingdata';
+    var tbname = 'w' + getNumberOfWeek();
+
     conn.query('CREATE TABLE IF NOT EXISTS ?? (id INT AUTO_INCREMENT PRIMARY KEY , postcode VARCHAR(10), score INTEGER, errorRate INTEGER , time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);', [tbname],
     function (err, results, fields) { 
         if (err) throw err; 
+        console.log("Created Table");
     })
     
     conn.query('INSERT INTO ?? (postcode, score, errorRate, time_stamp) VALUES (?, ?, ?, WEEK (CURRENT_TIMESTAMP,1) );', [tbname, postcode, score, errorRate],
         function (err, results, fields) {
             if (err) throw err;
             else {
-                console.log('Inserted ' + results.affectedRows + ' row(s).');
+                console.log('Inserted ' + results.affectedRows + ' row(s).' + "tbname" + tbname);
             }
         })
 
@@ -113,7 +115,7 @@ myRouter.route('/map').get((req, res) => {
             console.log("Maia booooishviliviyooo eee maia maia chm ddshvc");
         }
         const conn = new mysql.createConnection(config);
-        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w13 GROUP BY (postcode);',
+        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM w13 GROUP BY (postcode);',
         function (err, results) {
             if (err) {
                 debug.log(err);
@@ -158,10 +160,10 @@ myRouter.route('/query')
 
 
 myRouter.route('/test').get((req, res) => {
-    var w13 = 'ukwellbeing.' + 'w13';
+    var w13 = 'w13';
     const conn = new mysql.createConnection(config);
    
-    conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w13 GROUP BY (postcode);',
+    conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM w13 GROUP BY (postcode);',
     function (err, results) {
         if (err) {
             debug.log(err);
