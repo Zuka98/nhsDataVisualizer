@@ -63,7 +63,8 @@ html, body {
 
   .legendContainer, table {
     font-size: 15px;
-    width: 400px;
+    max-width: 400px;
+    width: auto;
     border-collapse: separate;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
