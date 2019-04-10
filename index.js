@@ -26,8 +26,22 @@ var config = {
 
 // const conn = new mysql.createConnection(config);
 
+function getNumberOfWeek() {
+    const today = new Date();
+    const firstDayOfYear = new Date(today.getFullYear(), 0, 1);
+    const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
+    return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+}
+
+
 function insertToDatabase(postcode, score, errorRate) {
-    conn.query('INSERT INTO w12 (postcode, score, errorRate) VALUES (?, ?, ?);', [postcode, score, errorRate],
+    var tbname = 'w' + getNumberOfWeek() + '.ukwellbeing';
+    conn.query('CREATE TABLE IF NOT EXISTS ? (id INT AUTO_INCREMENT PRIMARY KEY , postcode VARCHAR(10), score INTEGER, errorRate INTEGER , time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;',[tbname],
+    function (err, results, fields) { 
+        if (err) throw err; 
+    })
+    
+    conn.query('INSERT INTO ? (postcode, score, errorRate, time_stamp) VALUES (?, ?, ?, WEEK (CURRENT_TIMESTAMP,1) );', [tbname, postcode, score, errorRate],
         function (err, results, fields) {
             if (err) throw err;
             else {
@@ -68,11 +82,14 @@ myRouter.route('/androidquery')
     .post((req, res) => {
         console.log(req.body);
         var message = req.body;
+        manageTable();
         insertToDatabase(message.postcode, message.score, message.errorRate);
         res.end("Finish");
     })
 
 app.get('/', function (req, res) {
+    console.log('Current Time is' + getNumberOfWeek());
+
     res.render('index', {
         title: 'MyLibrary',
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
@@ -91,9 +108,11 @@ myRouter.route('/demomap').get((req, res) => {
 
 
 myRouter.route('/map').get((req, res) => {
-        var w13 = 'ukwellbeing.' + 'w13';
-        var myURL = 'UK-Adresses/' + req.url.split('?')[1];
-        console.log(myURL);
+        // console.log(req.url);
+        // var myURL = 'UK-Adresses/' + req.url.split('?')[1];
+        if(req.url == "/map"){
+            console.log("Maia booooishviliviyooo eee maia maia chm ddshvc");
+        }
         const conn = new mysql.createConnection(config);
         conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w13 GROUP BY (postcode);',
         function (err, results) {
@@ -117,13 +136,8 @@ myRouter.route('/map').get((req, res) => {
         
         conn.end(function (err) {
             if (err) throw err;
-        });
-
-        
+        });    
 })
-
-
-
 
 
 myRouter.route('/UK-Adresses')
@@ -142,6 +156,32 @@ myRouter.route('/query')
         insertToDatabase(message.postcode, message.score, message.errorRate);
 
     })
+
+
+myRouter.route('/test').get((req, res) => {
+    var w13 = 'ukwellbeing.' + 'w13';
+    const conn = new mysql.createConnection(config);
+   
+    conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ukwellbeing.w13 GROUP BY (postcode);',
+    function (err, results) {
+        if (err) {
+            debug.log(err);
+        }
+        else{ 
+            var mapDataArray = [];
+            for(var i = 0; i < results.length; i++){
+                mapDataArray.push({ 'name' : results[i].name, 'avgscore' : results[i].avgscore , 'quantity' : results[i].quantity})
+            }  
+            
+            res.send(results);
+            }
+        })
+        
+        conn.end(function (err) {
+            if (err) throw err;
+        });
+ 
+})
 
 
 const port = process.env.PORT || 3000;

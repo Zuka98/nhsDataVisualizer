@@ -1,0 +1,3 @@
+  <% for(var i = 0; i < mapData.length; i++){ %>
+            myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
+      <% } %>  

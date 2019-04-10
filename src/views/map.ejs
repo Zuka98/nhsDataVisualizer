@@ -82,25 +82,28 @@
     <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Please select the week
     <span class="caret"></span></button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="text-align: center">
-      <li role="presentation"><a role="menuitem" href="#" id="p"> 12.03.2019 - 19.03.2019 </a></li>
-      <li role="presentation"><a role="menuitem" href="#"> 19.03.2019 - 26.03.2019 </a></li>
-      <li role="presentation"><a role="menuitem" href="#"> 26.03.2019 - 03.04.2019 </a></li>
-
+      <li role="presentation"><a role="menuitem" onclick="loadWeekData('w13')"> 12.03.2019 - 19.03.2019 </a></li>
     </ul>
     
   </div>
 
 <script> 
-$("p").click(function(){
-  url: '/map',
-  async: 'true',
-  //force to handle it as text
-  dataType: "text",
-  data:  "Hello",
-  success: function(data) {
-      alert("success");
-  }
-});
+function loadWeekData(weekNum) {
+
+  $.ajax({
+        url: '/test',
+        async: 'true',
+        //force to handle it as text
+        dataType: "json",
+        data:  weekNum,
+        success: function(data) {
+              initMap(data);
+        }
+  });
+
+
+}
+
 </script>
 
 
@@ -122,7 +125,9 @@ $("p").click(function(){
 
     <script>
 
-    function initMap() {
+    function initMap(mapStats) {
+          
+      
           var lightStyle = new google.maps.StyledMapType(
             [
             {
@@ -500,10 +505,21 @@ $("p").click(function(){
        'TF','TN','TQ','TR','TS','TW','UB','W','WA','WC','WD','WF','WN','WR','WS','WV','YO','ZE'];
   
        var myMap = new Map();
-       <% for(var i = 0; i < mapData.length; i++){ %>
-            myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
-      <% } %>  
-     
+       
+       if(mapStats == null){
+          <% for(var i = 0; i < mapData.length; i++){ %>
+              myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
+        <% } %>  
+       }
+        else{
+            for(var i = 0; i < mapStats.length; i++){
+            myMap.set(mapStats[i].name,{ 'avgscore' : mapStats[i].avgscore, 'quantity' : mapStats[i].quantity});
+       }
+       
+      }
+    
+       
+
          
     function loadAreasOntoMap(i){
       if(!(i >= arr.length)){
@@ -526,7 +542,7 @@ $("p").click(function(){
   loadAreasOntoMap(0);
     
      
-      map.data.setStyle(function(feature,number) { 
+    map.data.setStyle(function(feature,number) { 
     var name = feature.getProperty('name');
     if(myMap.has(name)){
       var number = myMap.get(name).avgscore;
