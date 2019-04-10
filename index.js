@@ -89,8 +89,26 @@ myRouter.route('/androidquery')
         res.end("Finish");
     })
 
+
+    function getTablenames(){
+        const conn = new mysql.createConnection(config);
+        conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "w__" '),
+        function (err, results) {
+            if (err) {
+                debug.log(err);
+            }
+            else{ 
+                 console.log("hey");
+            }
+            }
+            conn.end(function (err) {
+                if (err) throw err;
+            });
+    }
+
+
 app.get('/', function (req, res) {
-    console.log('Current Time is' + getNumberOfWeek());
+    getTablenames();
     res.render('index', {
         title: 'MyLibrary',
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
@@ -108,29 +126,25 @@ myRouter.route('/demomap').get((req, res) => {
 })
 
 
+
+
+
+
 myRouter.route('/map').get((req, res) => {
         // console.log(req.url);
         // var myURL = 'UK-Adresses/' + req.url.split('?')[1];
-        if(req.url == "/map"){
-            console.log("Maia booooishviliviyooo eee maia maia chm ddshvc");
-        }
+      
         const conn = new mysql.createConnection(config);
-        conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM w13 GROUP BY (postcode);',
+        conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  LIKE "w__";',
         function (err, results) {
             if (err) {
                 debug.log(err);
             }
             else{ 
-            var mapDataArray = [];
-            
-            for(var i = 0; i < results.length; i++){
-                mapDataArray.push({ 'name' : results[i].name, 'avgscore' : results[i].avgscore , 'quantity' : results[i].quantity})
-            }  
-        
             res.render('map', {
                 title: 'Map',
                 nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
-                mapData: mapDataArray,
+                weektables: results,
             });
             }
         })
@@ -150,20 +164,31 @@ myRouter.route('/UK-Adresses')
         res.end("Finish");
     })
 
-//--- Queries to send data to database ---
-myRouter.route('/query')
-    .get((req, res) => {
-        res.send("Hello ");
-        insertToDatabase(message.postcode, message.score, message.errorRate);
+//--- Queries to send data to database  Purely for testing purposes---
+myRouter.route('/query').get((req, res) => {
+    const conn = new mysql.createConnection(config);
+    conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  LIKE "w__";',
+    function (err, results) {
+        if (err) {
+            debug.log(err);
+        }
+        else{ 
+            res.send(results);
+            }
+        })
+        
+        conn.end(function (err) {
+            if (err) throw err;
+        });
+        
+})
 
-    })
 
-
-myRouter.route('/test').get((req, res) => {
-    var w13 = 'w13';
+myRouter.route('/loadWeekData').get((req, res) => {
+    var weekNum = req.url.split('?')[1];
     const conn = new mysql.createConnection(config);
    
-    conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM w13 GROUP BY (postcode);',
+    conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ?? GROUP BY (postcode);',[weekNum],
     function (err, results) {
         if (err) {
             debug.log(err);

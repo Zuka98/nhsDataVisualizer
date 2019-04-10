@@ -72,26 +72,44 @@
   <!-- End Banner Area -->
 
 
-  <!--  Map Timeline Area --> 
- 
-  <section style="margin-top: 3%;">
-  <div class="container border-top-generic">
-    <h3 class="text-heading">Recorded Weeks</h3>
 
-    <div class="dropdown">
-    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Please select the week
-    <span class="caret"></span></button>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="text-align: center">
-      <li role="presentation"><a role="menuitem" onclick="loadWeekData('w13')"> 12.03.2019 - 19.03.2019 </a></li>
-    </ul>
-    
+
+<!-- Toggle Down Button -->
+
+
+<section style="margin-top: 3%;">
+  <div class="container border-top-generic">
+    <h3 class="text-heading">Recorded Weeks 2019</h3>
+    <!--  <h5 id = "currentWeek">  Displaying data for week <%=weektables[weektables.length - 1].TABLE_NAME.substring(1, 3) %>   </h5> -->
+
+  <div class="dropdown show">
+  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Please select the week
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <% for(var i = 0; i < weektables.length; i++){ %>
+      <a class="dropdown-item" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
+     <% } %> 
   </div>
+</div>
+
+</div>
+</section>
+
+<!-- End Toggle Down Button -->
+
+
+
+
+
+  <!--  Map Timeline Area --> 
 
 <script> 
 function loadWeekData(weekNum) {
 
   $.ajax({
-        url: '/test',
+        url: '/loadWeekData',
         async: 'true',
         //force to handle it as text
         dataType: "json",
@@ -507,15 +525,12 @@ function loadWeekData(weekNum) {
        var myMap = new Map();
        
        if(mapStats == null){
-          <% for(var i = 0; i < mapData.length; i++){ %>
-              myMap.set('<%=mapData[i].name%>',{ 'avgscore' : <%=mapData[i].avgscore%> , 'quantity' : <%=mapData[i].quantity%>});
-        <% } %>  
        }
         else{
             for(var i = 0; i < mapStats.length; i++){
             myMap.set(mapStats[i].name,{ 'avgscore' : mapStats[i].avgscore, 'quantity' : mapStats[i].quantity});
        }
-       
+
       }
     
        
