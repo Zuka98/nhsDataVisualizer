@@ -86,7 +86,8 @@ html, body {
   .lth {
     text-align: center;
     background-color: #55608f;
-    width: 100px;
+    max-width: 100px;
+    width: auto;
     height: 40px;
     color: white;
   }
