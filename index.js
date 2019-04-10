@@ -35,13 +35,14 @@ function getNumberOfWeek() {
 
 
 function insertToDatabase(postcode, score, errorRate) {
-    var tbname = 'w' + getNumberOfWeek() + '.ukwellbeing';
-    conn.query('CREATE TABLE IF NOT EXISTS ? (id INT AUTO_INCREMENT PRIMARY KEY , postcode VARCHAR(10), score INTEGER, errorRate INTEGER , time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;',[tbname],
+    const conn = new mysql.createConnection(config);
+    var tbname = 'w' + getNumberOfWeek() + '.wellbeingdata';
+    conn.query('CREATE TABLE IF NOT EXISTS ?? (id INT AUTO_INCREMENT PRIMARY KEY , postcode VARCHAR(10), score INTEGER, errorRate INTEGER , time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP);', [tbname],
     function (err, results, fields) { 
         if (err) throw err; 
     })
     
-    conn.query('INSERT INTO ? (postcode, score, errorRate, time_stamp) VALUES (?, ?, ?, WEEK (CURRENT_TIMESTAMP,1) );', [tbname, postcode, score, errorRate],
+    conn.query('INSERT INTO ?? (postcode, score, errorRate, time_stamp) VALUES (?, ?, ?, WEEK (CURRENT_TIMESTAMP,1) );', [tbname, postcode, score, errorRate],
         function (err, results, fields) {
             if (err) throw err;
             else {
@@ -88,7 +89,6 @@ myRouter.route('/androidquery')
 
 app.get('/', function (req, res) {
     console.log('Current Time is' + getNumberOfWeek());
-
     res.render('index', {
         title: 'MyLibrary',
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
