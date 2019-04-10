@@ -44,7 +44,7 @@ function insertToDatabase(postcode, score, errorRate) {
         console.log("Created Table");
     })
     
-    conn.query('INSERT INTO ?? (postcode, score, errorRate, time_stamp) VALUES (?, ?, ?, WEEK (CURRENT_TIMESTAMP,1) );', [tbname, postcode, score, errorRate],
+    conn.query('INSERT INTO ?? (postcode, score, errorRate) VALUES (?, ?, ?);', [tbname, postcode, score, errorRate],
         function (err, results, fields) {
             if (err) throw err;
             else {
