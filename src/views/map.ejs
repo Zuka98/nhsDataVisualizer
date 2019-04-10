@@ -82,16 +82,15 @@
     <h3 class="text-heading">Recorded Weeks 2019</h3>
 
 
-  <div class="dropdown show">
-  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Please select the week
-  </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <% for(var i = 0; i < weektables.length; i++){ %>
-      <a class="dropdown-item" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
-     <% } %> 
-  </div>
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Please Select the week
+  </button>
+  <div class="dropdown-menu">
+  <% for(var i = 0; i < weektables.length; i++){ %>
+  <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
+      <% } %> 
 </div>
 
 </div>

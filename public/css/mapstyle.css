@@ -41,7 +41,7 @@ html, body {
   #info-box {
     text-align: left;
     background-color: whitesmoke;
-    border: 3px solid black;
+    border: 2px solid black;
     bottom: 30px;
     height: 80px;
     width: 80px;
@@ -50,10 +50,9 @@ html, body {
   }
   .legendContainer {
     margin: 0;
-    background: -webkit-linear-gradient(45deg, #49a09d, #5f2c82);
-    background: linear-gradient(45deg, #49a09d, #5f2c82);
+    background: #0069d9;
     font-family: sans-serif;
-    border-radius: 8%;
+    border-radius: 3%;
     
   }
   .legendContainer {
@@ -85,9 +84,8 @@ html, body {
 
   .lth {
     text-align: center;
-    background-color: #55608f;
-    max-width: 100px;
-    width: auto;
+    background-color: #0069d9;
+    width: 100px;
     height: 40px;
     color: white;
   }
