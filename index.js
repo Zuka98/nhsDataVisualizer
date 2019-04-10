@@ -82,7 +82,6 @@ myRouter.route('/androidquery')
     .post((req, res) => {
         console.log(req.body);
         var message = req.body;
-        manageTable();
         insertToDatabase(message.postcode, message.score, message.errorRate);
         res.end("Finish");
     })
