@@ -96,13 +96,13 @@
 <!-- End Toggle Down Button -->
 
 
-
-
-
-  <!--  Map Timeline Area --> 
+ <!--  Map Timeline Area --> 
 
 <script> 
 function loadWeekData(weekNum) {
+  if(weekNum == 1){
+    weekNum = "<%= weektables[weektables.length-1].TABLE_NAME%>";
+  }
 
   $.ajax({
         url: '/loadWeekData',
@@ -117,6 +117,7 @@ function loadWeekData(weekNum) {
 
 
 }
+
 
 </script>
 
@@ -139,8 +140,12 @@ function loadWeekData(weekNum) {
 
     <script>
 
+
+    function asyncLoadCallBack(){
+        loadWeekData(1);
+    }
+
     function initMap(mapStats) {
-          
       
           var lightStyle = new google.maps.StyledMapType(
             [
@@ -660,6 +665,6 @@ function loadWeekData(weekNum) {
 		<script src="js/jquery.magnific-popup.min.js"></script>
 		<script src="js/jquery.flipster.min.js"></script>
     <script src="js/main.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=initMap"> </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhfs3WQijSbqOY-RDmoC1RoYfc3RIiRs4&callback=asyncLoadCallBack"> </script>
 	</body>
 </html>
