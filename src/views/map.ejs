@@ -77,28 +77,33 @@
   <section style="margin-top: 3%;">
   <div class="container border-top-generic">
     <h3 class="text-heading">Recorded Weeks</h3>
-  
-    <div class="button-group-area mt-40">
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 19.03.2019 - 26.03.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 26.03.2019 - 03.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 03.04.2019 - 10.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 19.03.2019 - 26.03.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 26.03.2019 - 03.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 03.04.2019 - 10.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 19.03.2019 - 26.03.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 26.03.2019 - 03.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 03.04.2019 - 10.04.2019</a>
-    <a href="/map" class="genric-btn primary-border circle arrow"> 12.03.2019 - 19.03.2019 </a>
 
-   
-    </div>
+    <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Please select the week
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="text-align: center">
+      <li role="presentation"><a role="menuitem" href="#" id="p"> 12.03.2019 - 19.03.2019 </a></li>
+      <li role="presentation"><a role="menuitem" href="#"> 19.03.2019 - 26.03.2019 </a></li>
+      <li role="presentation"><a role="menuitem" href="#"> 26.03.2019 - 03.04.2019 </a></li>
+
+    </ul>
     
   </div>
+
+<script> 
+$("p").click(function(){
+  url: '/map',
+  async: 'true',
+  //force to handle it as text
+  dataType: "text",
+  data:  "Hello",
+  success: function(data) {
+      alert("success");
+  }
+});
+</script>
+
+
 </section>
 
   <!-- End Map Timeline Area --> 
@@ -583,10 +588,10 @@
                   <tbody class= "legendtbody tb">
                     <tr>
                       <td class = "lth">Color</td>
-                      <td class = "ltd"><span style='background:red;' class="lspan" ></span></td>
-                      <td class = "ltd"><span style='background:orange;' class="lspan"></span></td>
-                      <td class = "ltd" > <span style='background:yellow;' class="lspan"></span></td>
-                      <td class = "ltd"><span style='background:green;' class="lspan"></span></td>
+                      <td class = "ltd"><span style='background: #E56F73;' class="lspan" ></span></td>
+                      <td class = "ltd"><span style='background: #F0D0A3;' class="lspan"></span></td>
+                      <td class = "ltd" > <span style='background: #EEFAA9;' class="lspan"></span></td>
+                      <td class = "ltd"><span style='background: #9EB594;' class="lspan"></span></td>
                     </tr>
           
                     <tr>
