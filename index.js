@@ -92,7 +92,7 @@ myRouter.route('/androidquery')
 
     function getTablenames(){
         const conn = new mysql.createConnection(config);
-        conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "w__" '),
+        conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE "w__" OR  TABLE_NAME LIKE "w_"'),
         function (err, results) {
             if (err) {
                 debug.log(err);
