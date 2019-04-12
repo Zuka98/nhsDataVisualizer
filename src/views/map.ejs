@@ -87,7 +87,7 @@
       </button>
           <div class="dropdown-menu">
           <% for(var i = 0; i < weektables.length; i++){ %>
-          <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
+          <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> <%=dates[i]%> </a>
             <% } %> 
           </div>
     </div>

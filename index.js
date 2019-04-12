@@ -23,6 +23,7 @@ var config = {
     password: 'wellwellwell!23',
     database: 'ukwellbeing',
     port: 0,
+    //Purchase proper SSL certificate once move to Production. Requires Scaling up App service on Azure
     ssl: true
 };
 
@@ -34,6 +35,8 @@ function getNumberOfWeek() {
     const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
     return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
+
+
 
 
 function insertToDatabase(postcode, score, errorRate) {
@@ -111,13 +114,65 @@ myRouter.route('/androidquery')
     }
 
 
+function getDateOfISOWeek(w, y) {
+        //Add formating so it does DAY-Month
+        var simple = new Date(y, 0, 1 + (w - 1) * 7);
+        var dow = simple.getDay();
+        var ISOweekStart = simple;
+        if (dow <= 4)
+            ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+        else
+            ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+        return ISOweekStart;
+    }
+
+function getYear(){
+    var date = new Date();
+    return date.getFullYear();
+}
+
+function formatDates(startDate){
+    var dd1 = startDate.getDate();
+    var mm1 = startDate.getMonth() + 1;
+    // if(dd1 < 10){
+    //     dd1 = "0" + dd1;
+    // }
+    // if (mm1 < 10){
+    //     mm1 = "0" + mm1;
+    // }
+    var endDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+6)
+    
+    dd2 = endDate.getDate();
+    mm2 = endDate.getMonth() + 1;
+    // if(dd2 < 10){
+    //     dd2 = "0" + dd1;
+    // }
+    // if (mm2 < 10 && mm2.length < 2){
+    //     mm2 = "0" + mm1;
+    // }
+    var formattedData = dd1 + ":" + mm1 + " - " + dd2 + ":" + mm1;
+    return formattedData;
+}
+
 app.get('/', function (req, res) {
-    getTablenames();
     res.render('index', {
         title: 'MyLibrary',
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
     });
 });
+
+function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    return ISOweekStart;
+}
+
+
 
 
 
@@ -138,7 +193,7 @@ myRouter.route('/demomap').get((req, res) => {
 myRouter.route('/map').get((req, res) => {
         // console.log(req.url);
         // var myURL = 'UK-Adresses/' + req.url.split('?')[1];
-      
+
         const conn = new mysql.createConnection(config);
         conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  LIKE "w__";',
         function (err, results) {
@@ -146,10 +201,21 @@ myRouter.route('/map').get((req, res) => {
                 debug.log(err);
             }
             else{ 
+           
+            var temp1 = getDateOfISOWeek(15, getYear());
+            formatDates(temp1);
+            
+            var dates = [];
+            for(var i = 0; i < results.length; i++){
+                dates.push(formatDates(getDateOfISOWeek(results[i].TABLE_NAME.substring(1,3),getYear())));
+                console.log(dates);
+            }
+           
             res.render('map', {
                 title: 'Map',
                 nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }],
                 weektables: results,
+                dates: dates,
             });
             }
         })
