@@ -599,20 +599,10 @@ function loadWeekData(weekNum) {
        return loadAreasOntoMap(i + 1);
     }
   }
-  map.data.setStyle(function(feature,number) { 
-    var name = feature.getProperty('name');
-        return{
-          fillColor: "#ffffff",
-          strokeWeight: 0.1
-         }
-      } 
-  });
-
-
 
   loadAreasOntoMap(0);
-  
-  };
+
+ 
   
   </script>
     </div>
