@@ -89,8 +89,6 @@
           <% for(var i = 0; i < weektables.length; i++){ %>
           <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> 12.03  - 19.03  </a>
             <% } %> 
-
-            <a class="dropdown-item" style="cursor: pointer;" onclick="test('<%=weektables[2].TABLE_NAME%>')" > Test </a>
           </div>
     </div>
 </section>
@@ -133,6 +131,11 @@ function setMapStyle(mapStats){
       }
   
     });
+
+    //Reset current box element values
+    document.getElementById('postcode-txt').textContent = "Postcode: ";
+    document.getElementById('score-txt').textContent = "Average Score: ";
+    document.getElementById('quantity-txt').textContent = "Number of records: ";
   
     map.data.addListener('mouseover', function(event) {
       var name = event.feature.getProperty('name');
