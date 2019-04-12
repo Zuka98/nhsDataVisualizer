@@ -134,22 +134,24 @@ function getYear(){
 function formatDates(startDate){
     var dd1 = startDate.getDate();
     var mm1 = startDate.getMonth() + 1;
-    // if(dd1 < 10){
-    //     dd1 = "0" + dd1;
-    // }
-    // if (mm1 < 10){
-    //     mm1 = "0" + mm1;
-    // }
+    if(dd1 < 10){
+        dd1 = "0" + dd1;
+    }
+    if (mm1 < 10){
+        mm1 = "0" + mm1;
+    }
+    
     var endDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+6)
     
     dd2 = endDate.getDate();
     mm2 = endDate.getMonth() + 1;
-    // if(dd2 < 10){
-    //     dd2 = "0" + dd1;
-    // }
-    // if (mm2 < 10 && mm2.length < 2){
-    //     mm2 = "0" + mm1;
-    // }
+    if(dd2 < 10){
+        dd2 = "0" + dd2;
+    }
+    if (mm2 < 10){
+        mm2 = "0" + mm2;
+    }
+
     var formattedData = dd1 + ":" + mm1 + " - " + dd2 + ":" + mm1;
     return formattedData;
 }
@@ -173,27 +175,17 @@ function getDateOfISOWeek(w, y) {
 }
 
 
-
-
-
 //To display mock up data for demo purposes
 myRouter.route('/demomap').get((req, res) => {
     res.render('map_demo', {
         title: 'MyLibrary',
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
-
     });
 })
 
 
 
-
-
-
 myRouter.route('/map').get((req, res) => {
-        // console.log(req.url);
-        // var myURL = 'UK-Adresses/' + req.url.split('?')[1];
-
         const conn = new mysql.createConnection(config);
         conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  LIKE "w__";',
         function (err, results) {
@@ -247,18 +239,15 @@ myRouter.route('/query').get((req, res) => {
             res.send(results);
             }
         })
-        
         conn.end(function (err) {
             if (err) throw err;
-        });
-        
+        });  
 })
 
 
 myRouter.route('/loadWeekData').get((req, res) => {
     var weekNum = req.url.split('?')[1];
     const conn = new mysql.createConnection(config);
-   
     conn.query('SELECT postcode as name, AVG(score) as avgscore, COUNT(postcode) as quantity FROM ?? GROUP BY (postcode);',[weekNum],
     function (err, results) {
         if (err) {
@@ -272,12 +261,10 @@ myRouter.route('/loadWeekData').get((req, res) => {
             
             res.send(results);
             }
-        })
-        
+        }) 
         conn.end(function (err) {
             if (err) throw err;
         });
- 
 })
 
 

@@ -87,10 +87,11 @@
       </button>
           <div class="dropdown-menu">
           <% for(var i = 0; i < weektables.length; i++){ %>
-          <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > <%=weektables[i].TABLE_NAME%> <%=dates[i]%> </a>
+          <a class="dropdown-item" style="cursor: pointer;" onclick="loadWeekData('<%=weektables[i].TABLE_NAME%>')" > Week <%=weektables[i].TABLE_NAME.substring(1,3)%> : <%=dates[i]%> </a>
             <% } %> 
           </div>
     </div>
+    <p id='selectedWeek' style='margin-bottom: -2%'>  </p>
 </section>
 
 <!-- End Toggle Down Button -->
@@ -155,10 +156,6 @@ function setMapStyle(mapStats){
 
 </script>
 
-
-
-
-
  <!--  Map Timeline Area --> 
 <script> 
 function loadWeekData(weekNum) {
@@ -175,6 +172,9 @@ function loadWeekData(weekNum) {
               setMapStyle(data);
         }
   });
+  document.getElementById('selectedWeek').textContent = "Selected Week: " + weekNum.substring(1,3);
+
+
 }
 </script>
 
