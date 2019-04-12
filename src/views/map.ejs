@@ -600,7 +600,17 @@ function loadWeekData(weekNum) {
     }
   }
   loadAreasOntoMap(0);
-  
+
+
+  map.data.setStyle(function(feature,number) {
+    return {
+      fillColor: "#ffffff",
+      strokeWeight: 0.1
+     }; 
+
+  });
+
+
   };
   
   </script>
