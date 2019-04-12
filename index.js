@@ -7,6 +7,8 @@ var chalk = require('chalk');
 var fs = require('fs');
 var str = require('stringify');
 
+var https = require('https');
+
 var path = require('path');
 var bodyParser = require('body-parser');
 
@@ -81,6 +83,8 @@ app.set('view engine', 'ejs');
 // Use of myRouter should be last thing
 app.use('/', myRouter);
 
+
+
 myRouter.route('/androidquery')
     .post((req, res) => {
         console.log(req.body);
@@ -114,6 +118,7 @@ app.get('/', function (req, res) {
         nav: [{ link: '/', title: 'Home' }, { link: '/map', title: 'Map' }, { link: '/demomap', title: 'Map-Demo' }]
     });
 });
+
 
 
 //To display mock up data for demo purposes
@@ -208,6 +213,8 @@ myRouter.route('/loadWeekData').get((req, res) => {
         });
  
 })
+
+
 
 
 const port = process.env.PORT || 3000;
