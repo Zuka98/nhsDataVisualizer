@@ -141,7 +141,7 @@ function formatDates(startDate){
         mm1 = "0" + mm1;
     }
     
-    var endDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+6)
+    var endDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate()+7)
     
     dd2 = endDate.getDate();
     mm2 = endDate.getMonth() + 1;
