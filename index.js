@@ -218,9 +218,9 @@ myRouter.route('/map').get((req, res) => {
 })
 
 
-myRouter.route('/UK-Adresses')
+myRouter.route('/Postcode_Polygons')
     .get((req, res) => {
-        var myURL = 'UK-Adresses/' + req.url.split('?')[1] + '.geojson';
+        var myURL = 'Postcode_Polygons/' + req.url.split('?')[1] + '.geojson';
         let rawdata = fs.readFileSync(myURL);
         jsondata = JSON.parse(rawdata);
         res.send(jsondata);
