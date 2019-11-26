@@ -1,13 +1,9 @@
 var express = require('express');
-
 var app = express();
 var debug = require('debug')('app');
 var morgan = require('morgan');
 var chalk = require('chalk');
 var fs = require('fs');
-var str = require('stringify');
-
-var https = require('https');
 
 var path = require('path');
 var bodyParser = require('body-parser');
@@ -18,13 +14,13 @@ var myRouter = express.Router();
 //Database Connection
 const mysql = require('mysql');
 var config = {
-    host: 'wwwdatabase.mysql.database.azure.com',
-    user: 'zuka98@wwwdatabase',
-    password: 'wellwellwell!23',
-    database: 'ukwellbeing',
-    port: 0,
-    //Purchase proper SSL certificate once move to Production. Requires Scaling up App service on Azure
-    ssl: true
+    //Configuration Required for usage
+    // host: '',
+    // user: '',
+    // password: '',
+    // database: '',
+    // port: 0,
+    // ssl: true
 };
 
 // const conn = new mysql.createConnection(config);
@@ -35,8 +31,6 @@ function getNumberOfWeek() {
     const pastDaysOfYear = (today - firstDayOfYear) / 86400000;
     return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
 }
-
-
 
 
 function insertToDatabase(postcode, score, errorRate) {
@@ -227,7 +221,7 @@ myRouter.route('/Postcode_Polygons')
         res.end("Finish");
     })
 
-//--- Queries to send data to database  Purely for testing purposes---
+//--- Queries to send data to database for testing purposes---
 myRouter.route('/query').get((req, res) => {
     const conn = new mysql.createConnection(config);
     conn.query('SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME  LIKE "w__";',
