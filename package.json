@@ -9,17 +9,17 @@
         "start": "DEBUG=index node index.js"
     },
     "dependencies": {
-        "body-parser": "^1.18.3",
+        "body-parser": "^1.19.0",
         "bootstrap": "^4.3.1",
         "chalk": "2.4.2",
         "debug": "^4.1.1",
-        "ejs": "^2.6.1",
+        "ejs": "^2.7.4",
         "express": "4.16.4",
-        "express-generator": "^4.16.0",
+        "express-generator": "^4.16.1",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "morgan": "^1.9.1",
-        "mysql": "^2.16.0",
+        "mysql": "^2.17.1",
         "stringify": "^5.2.0"
     }
 }
